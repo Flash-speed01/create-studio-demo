@@ -4,68 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f6f7fb" />
-    <meta name="description" content="CreateShop is a simple, friendly design editor for making graphics with text and shapes." />
+    <meta name="description" content="CreateShop is a friendly design editor for making graphics with text, shapes, and custom backgrounds." />
     <title>CreateShop — make something great</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="editor-features.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="#" aria-label="CreateShop home">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-          <span>Create<span class="brand-accent">Shop</span></span>
-        </a>
+        <a class="brand" href="#" aria-label="CreateShop home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>Create<span class="brand-accent">Shop</span></span></a>
         <div class="document-title"><span class="live-dot"></span><span>Untitled design</span><span class="saved-label">Saved locally</span></div>
-        <div class="top-actions">
-          <button class="button button-quiet" id="reset-button" type="button" title="Clear your design">Start over</button>
-          <button class="button button-primary" id="download-button" type="button"><span aria-hidden="true">↓</span> Export PNG</button>
-        </div>
+        <div class="top-actions"><button class="button button-quiet" id="undo-button" type="button" title="Undo (Ctrl/⌘ Z)" aria-label="Undo">↶</button><button class="button button-quiet" id="redo-button" type="button" title="Redo (Ctrl/⌘ Shift Z)" aria-label="Redo">↷</button><button class="button button-quiet" id="reset-button" type="button" title="Clear your design">Start over</button><button class="button button-primary" id="download-button" type="button"><span aria-hidden="true">↓</span> Export PNG</button></div>
       </header>
-
       <main class="editor-layout">
         <aside class="sidebar" aria-label="Design tools and properties">
-          <section class="side-section">
-            <div class="section-heading"><h1>Make it yours</h1><span class="section-step">01</span></div>
-            <p class="section-copy">Add an element to your canvas</p>
-            <div class="insert-grid">
-              <button class="insert-button" type="button" data-add="text"><span class="insert-icon text-icon">T</span><span>Text</span></button>
-              <button class="insert-button" type="button" data-add="rect"><span class="insert-icon rect-icon"></span><span>Rectangle</span></button>
-              <button class="insert-button" type="button" data-add="circle"><span class="insert-icon circle-icon"></span><span>Circle</span></button>
-            </div>
-          </section>
-
-          <section class="side-section properties-section">
-            <div class="section-heading"><h2>Properties</h2><span class="selection-count" id="selection-count">—</span></div>
-            <div id="properties" class="properties-content"><div class="empty-state"><span class="empty-cursor">↖</span><p>Select an object on your canvas to edit its style.</p></div></div>
-          </section>
-
-          <section class="side-section layers-section">
-            <div class="section-heading"><h2>Layers</h2><span class="layer-count" id="layer-count">0</span></div>
-            <div id="layers" class="layers-list"><p class="layers-empty">Your design is waiting for its first layer.</p></div>
-          </section>
-
+          <section class="side-section"><div class="section-heading"><h1>Make it yours</h1><span class="section-step">01</span></div><p class="section-copy">Add an element to your canvas</p><div class="insert-grid"><button class="insert-button" type="button" data-add="text"><span class="insert-icon text-icon">T</span><span>Text</span></button><button class="insert-button" type="button" data-add="rect"><span class="insert-icon rect-icon"></span><span>Rectangle</span></button><button class="insert-button" type="button" data-add="circle"><span class="insert-icon circle-icon"></span><span>Circle</span></button><button class="insert-button" type="button" data-add="line"><span class="insert-icon line-icon"></span><span>Line</span></button></div></section>
+          <section class="side-section page-section"><div class="section-heading"><h2>Page setup</h2><span class="section-step">02</span></div><label class="field page-size-field"><span>Canvas size</span><select id="page-size"><option value="custom">Custom canvas</option><option value="a4">A4</option><option value="a3">A3</option><option value="letter">US Letter</option><option value="square">Square</option><option value="social">Social post</option><option value="story">Story / Reel</option></select></label><div class="orientation-row"><button type="button" class="orientation-button active" data-orientation="portrait">▯ Portrait</button><button type="button" class="orientation-button" data-orientation="landscape">▭ Landscape</button></div><div class="custom-size" id="custom-size"><label><span>W</span><input id="custom-width" type="number" min="200" max="2400" value="800" aria-label="Canvas width" /></label><span>×</span><label><span>H</span><input id="custom-height" type="number" min="200" max="2400" value="520" aria-label="Canvas height" /></label></div><div class="section-heading background-heading"><h2>Background</h2></div><div class="background-swatches" aria-label="Background presets"><button type="button" class="swatch active" data-background="#ffffff" style="--swatch:#ffffff" aria-label="White background"></button><button type="button" class="swatch" data-background="#fff1e8" style="--swatch:#fff1e8" aria-label="Peach background"></button><button type="button" class="swatch" data-background="#e9f5ef" style="--swatch:#e9f5ef" aria-label="Mint background"></button><button type="button" class="swatch" data-background="#eeeaff" style="--swatch:#eeeaff" aria-label="Lavender background"></button><button type="button" class="swatch" data-background="#202039" style="--swatch:#202039" aria-label="Midnight background"></button><label class="custom-color" title="Choose custom background"><input id="background-color" type="color" value="#ffffff" aria-label="Custom background color"/><span>＋</span></label></div><div class="gradient-presets"><button type="button" class="gradient-chip gradient-sunrise" data-gradient="sunrise">Sunrise</button><button type="button" class="gradient-chip gradient-ocean" data-gradient="ocean">Ocean</button><button type="button" class="gradient-chip gradient-candy" data-gradient="candy">Candy</button><button type="button" class="gradient-chip" data-gradient="none">Solid</button></div></section>
+          <section class="side-section properties-section"><div class="section-heading"><h2>Properties</h2><span class="selection-count" id="selection-count">—</span></div><div id="properties" class="properties-content"><div class="empty-state"><span class="empty-cursor">↖</span><p>Select an object on your canvas to edit its style.</p></div></div></section>
+          <section class="side-section layers-section"><div class="section-heading"><h2>Layers</h2><span class="layer-count" id="layer-count">0</span></div><div id="layers" class="layers-list"><p class="layers-empty">Your design is waiting for its first layer.</p></div></section>
           <div class="sidebar-footer"><span class="footer-sparkle">✳</span><span>Good ideas start somewhere.</span></div>
         </aside>
-
-        <section class="workspace" aria-label="Design workspace">
-          <div class="workspace-toolbar"><div class="canvas-label"><span class="canvas-indicator"></span><span>Untitled design</span><span class="canvas-size">800 × 520</span></div><div class="zoom-label">100%</div></div>
-          <div class="canvas-stage">
-            <div class="artboard-wrap">
-              <svg id="artboard" class="artboard" viewBox="0 0 800 520" role="img" aria-label="Design canvas. Add text or shapes to get started." xmlns="http://www.w3.org/2000/svg">
-                <rect class="artboard-background" width="800" height="520" fill="#ffffff"></rect>
-                <g id="scene"></g>
-              </svg>
-            </div>
-            <div class="canvas-hint"><span class="hint-key">Tip</span> Drag anything to move it around</div>
-          </div>
-          <footer class="workspace-footer"><span><span class="footer-status-dot"></span> All changes saved on this device</span><span>Made for your next big idea <span class="footer-heart">♥</span></span></footer>
-        </section>
+        <section class="workspace" aria-label="Design workspace"><div class="workspace-toolbar"><div class="canvas-label"><span class="canvas-indicator"></span><span>Untitled design</span><span class="canvas-size" id="canvas-size">800 × 520</span></div><div class="zoom-label">100%</div></div><div class="canvas-stage"><div class="artboard-wrap"><svg id="artboard" class="artboard" viewBox="0 0 800 520" role="img" aria-label="Design canvas. Add text or shapes to get started." xmlns="http://www.w3.org/2000/svg"><defs id="canvas-defs"></defs><rect id="canvas-background" class="artboard-background" width="800" height="520" fill="#ffffff"></rect><g id="scene"></g></svg></div><div class="canvas-hint"><span class="hint-key">Tip</span> Drag anything to move it around</div></div><footer class="workspace-footer"><span><span class="footer-status-dot"></span> All changes saved on this device</span><span>Made for your next big idea <span class="footer-heart">♥</span></span></footer></section>
       </main>
     </div>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js"></script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div><script src="app.js"></script>
   </body>
 </html>
